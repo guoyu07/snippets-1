@@ -1,7 +1,8 @@
-// Type definitions for Meteor 1.3
+// Type definitions for Meteor
 // Project: http://www.meteor.com/
 // Definitions by: Dave Allen <https://github.com/fullflavedave>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
+// Changed by ZenCodex: https://github.com/zencodex/snippets/blob/master/meteor.d.ts
 
 /**
  * These are the common (for client and server) modules and interfaces that can't be automatically generated from the Meteor data.js file
@@ -15,7 +16,7 @@ interface JSONable {
 }
 interface EJSON extends EJSONable { }
 
-declare module "meteor/match" {
+declare module "meteor/check" {
   export module Match {
     export var Any: any;
     export var String: any;
@@ -29,6 +30,8 @@ declare module "meteor/match" {
     export function OneOf(...patterns: any[]): any;
     export function Where(condition: any): any;
   }
+
+  export function check(value: any, pattern: any): void;
 }
 
 
@@ -59,6 +62,8 @@ declare module "meteor/meteor" {
     interface LiveQueryHandle {
       stop(): void;
     }
+
+
   }
 }
 
@@ -386,6 +391,8 @@ declare module "meteor/accounts-base" {
       profile?: Object;
     }, callback?: Function): string;
     var emailTemplates: Meteor.EmailTemplates;
+    var _options: any;
+    function createUserWithPhone(options: Object);
     function findUserByEmail(email: string): Object;
     function findUserByUsername(username: string): Object;
     function forgotPassword(options: {
@@ -616,6 +623,7 @@ declare module "meteor/meteor" {
     function userId(): string;
     var users: Mongo.Collection<User>;
     function wrapAsync(func: Function, context?: Object): any;
+    function publishComposite(name: string, options: Object);
   }
 }
 
